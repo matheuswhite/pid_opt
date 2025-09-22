@@ -22,7 +22,7 @@ impl Population {
             NewRandomPopulation::default(),
         );
 
-        Self { individuals }
+        Self { individuals }.sorted()
     }
 
     pub fn len(&self) -> usize {
@@ -44,6 +44,7 @@ impl Population {
         );
         self.individuals = inds;
         self.individuals.sort_by(|a, b| a.partial_cmp(b).unwrap());
+        self.individuals.drain(3_000.min(self.individuals.len())..);
         self
     }
 
@@ -101,8 +102,8 @@ struct NewRandomPopulation {
 }
 
 impl NewRandomPopulation {
-    const MAX_KP: f32 = 100.0;
-    const MAX_KI: f32 = 100.0;
+    const MAX_KP: f32 = 5.0;
+    const MAX_KI: f32 = 5.0;
     const MAX_KD: f32 = 1.0;
 }
 
@@ -118,8 +119,6 @@ impl Work for NewRandomPopulation {
             let ki = rand::random::<f32>() * Self::MAX_KI;
             let kd = rand::random::<f32>() * Self::MAX_KD;
             individuals.push(Individual::new(kp, ki, kd));
-
-            // progress_bar(format!("W {}", self.id), individuals.len(), size);
         }
 
         individuals

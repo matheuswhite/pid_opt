@@ -1,0 +1,1003 @@
+Generating initial population...
+Filtered 0 individuals with non-finite fitness (5000 remaining)
+Evolving generation 0
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 44 individuals with non-finite fitness (956 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3656 remaining)
+Generation 1:
+  Size: 3000
+  Best PID = (kp: 5.88, ki: 4.73, kd: 0.83) with fitness 0.05012
+Evolving generation 1
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 60 individuals with non-finite fitness (940 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3640 remaining)
+Generation 2:
+  Size: 3000
+  Best PID = (kp: 5.93, ki: 4.66, kd: 0.63) with fitness 0.04902
+Evolving generation 2
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 44 individuals with non-finite fitness (956 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3656 remaining)
+Generation 3:
+  Size: 3000
+  Best PID = (kp: 5.79, ki: 6.36, kd: 0.32) with fitness 0.04473
+Evolving generation 3
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 41 individuals with non-finite fitness (959 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3659 remaining)
+Generation 4:
+  Size: 3000
+  Best PID = (kp: 6.63, ki: 6.79, kd: 0.32) with fitness 0.04366
+Evolving generation 4
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 57 individuals with non-finite fitness (943 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3643 remaining)
+Generation 5:
+  Size: 3000
+  Best PID = (kp: 6.63, ki: 6.79, kd: 0.32) with fitness 0.04366
+Evolving generation 5
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 51 individuals with non-finite fitness (949 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3649 remaining)
+Generation 6:
+  Size: 3000
+  Best PID = (kp: 6.63, ki: 6.79, kd: 0.32) with fitness 0.03829
+Evolving generation 6
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 42 individuals with non-finite fitness (958 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3658 remaining)
+Generation 7:
+  Size: 3000
+  Best PID = (kp: 6.63, ki: 6.79, kd: 0.32) with fitness 0.03829
+Evolving generation 7
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 55 individuals with non-finite fitness (945 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3645 remaining)
+Generation 8:
+  Size: 3000
+  Best PID = (kp: 6.63, ki: 6.79, kd: 0.32) with fitness 0.03829
+Evolving generation 8
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 41 individuals with non-finite fitness (959 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3659 remaining)
+Generation 9:
+  Size: 3000
+  Best PID = (kp: 7.29, ki: 6.79, kd: 0.32) with fitness 0.03816
+Evolving generation 9
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 31 individuals with non-finite fitness (969 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3669 remaining)
+Generation 10:
+  Size: 3000
+  Best PID = (kp: 6.69, ki: 7.00, kd: -0.25) with fitness 0.03776
+Evolving generation 10
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 38 individuals with non-finite fitness (962 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3662 remaining)
+Generation 11:
+  Size: 3000
+  Best PID = (kp: 7.13, ki: 6.95, kd: 0.43) with fitness 0.03721
+Evolving generation 11
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 30 individuals with non-finite fitness (970 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3670 remaining)
+Generation 12:
+  Size: 3000
+  Best PID = (kp: 8.03, ki: 6.94, kd: 0.59) with fitness 0.03591
+Evolving generation 12
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 31 individuals with non-finite fitness (969 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3669 remaining)
+Generation 13:
+  Size: 3000
+  Best PID = (kp: 7.23, ki: 8.20, kd: -0.55) with fitness 0.03452
+Evolving generation 13
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 37 individuals with non-finite fitness (963 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3663 remaining)
+Generation 14:
+  Size: 3000
+  Best PID = (kp: 7.40, ki: 7.44, kd: -0.18) with fitness 0.03353
+Evolving generation 14
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 39 individuals with non-finite fitness (961 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3661 remaining)
+Generation 15:
+  Size: 3000
+  Best PID = (kp: 7.79, ki: 7.56, kd: 0.26) with fitness 0.03324
+Evolving generation 15
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 35 individuals with non-finite fitness (965 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3665 remaining)
+Generation 16:
+  Size: 3000
+  Best PID = (kp: 7.79, ki: 8.16, kd: 0.26) with fitness 0.03269
+Evolving generation 16
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 41 individuals with non-finite fitness (959 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3659 remaining)
+Generation 17:
+  Size: 3000
+  Best PID = (kp: 7.79, ki: 8.16, kd: -0.26) with fitness 0.03207
+Evolving generation 17
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 41 individuals with non-finite fitness (959 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3659 remaining)
+Generation 18:
+  Size: 3000
+  Best PID = (kp: 7.79, ki: 8.16, kd: -0.26) with fitness 0.03207
+Evolving generation 18
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 34 individuals with non-finite fitness (966 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3666 remaining)
+Generation 19:
+  Size: 3000
+  Best PID = (kp: 7.79, ki: 8.16, kd: -0.26) with fitness 0.03133
+Evolving generation 19
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 35 individuals with non-finite fitness (965 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3665 remaining)
+Generation 20:
+  Size: 3000
+  Best PID = (kp: 8.23, ki: 8.16, kd: -0.26) with fitness 0.03098
+Evolving generation 20
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 47 individuals with non-finite fitness (953 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3653 remaining)
+Generation 21:
+  Size: 3000
+  Best PID = (kp: 8.81, ki: 8.87, kd: -0.51) with fitness 0.03029
+Evolving generation 21
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 35 individuals with non-finite fitness (965 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3665 remaining)
+Generation 22:
+  Size: 3000
+  Best PID = (kp: 8.81, ki: 8.83, kd: 0.26) with fitness 0.02980
+Evolving generation 22
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 45 individuals with non-finite fitness (955 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3655 remaining)
+Generation 23:
+  Size: 3000
+  Best PID = (kp: 9.05, ki: 8.19, kd: 0.45) with fitness 0.02979
+Evolving generation 23
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 46 individuals with non-finite fitness (954 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3654 remaining)
+Generation 24:
+  Size: 3000
+  Best PID = (kp: 8.42, ki: 9.06, kd: -0.54) with fitness 0.02875
+Evolving generation 24
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 27 individuals with non-finite fitness (973 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3673 remaining)
+Generation 25:
+  Size: 3000
+  Best PID = (kp: 9.60, ki: 8.87, kd: -0.51) with fitness 0.02751
+Evolving generation 25
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 27 individuals with non-finite fitness (973 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3673 remaining)
+Generation 26:
+  Size: 3000
+  Best PID = (kp: 9.60, ki: 8.87, kd: -0.51) with fitness 0.02751
+Evolving generation 26
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 31 individuals with non-finite fitness (969 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3669 remaining)
+Generation 27:
+  Size: 3000
+  Best PID = (kp: 9.82, ki: 9.58, kd: -0.24) with fitness 0.02608
+Evolving generation 27
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 37 individuals with non-finite fitness (963 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3663 remaining)
+Generation 28:
+  Size: 3000
+  Best PID = (kp: 9.82, ki: 9.58, kd: -0.24) with fitness 0.02608
+Evolving generation 28
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 28 individuals with non-finite fitness (972 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3672 remaining)
+Generation 29:
+  Size: 3000
+  Best PID = (kp: 9.82, ki: 9.58, kd: -0.24) with fitness 0.02608
+Evolving generation 29
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 22 individuals with non-finite fitness (978 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3678 remaining)
+Generation 30:
+  Size: 3000
+  Best PID = (kp: 10.81, ki: 9.59, kd: 0.13) with fitness 0.02538
+Evolving generation 30
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 29 individuals with non-finite fitness (971 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3671 remaining)
+Generation 31:
+  Size: 3000
+  Best PID = (kp: 10.81, ki: 9.59, kd: 0.13) with fitness 0.02538
+Evolving generation 31
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 24 individuals with non-finite fitness (976 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3676 remaining)
+Generation 32:
+  Size: 3000
+  Best PID = (kp: 10.88, ki: 9.95, kd: 0.46) with fitness 0.02480
+Evolving generation 32
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 20 individuals with non-finite fitness (980 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3680 remaining)
+Generation 33:
+  Size: 3000
+  Best PID = (kp: 10.74, ki: 10.15, kd: 0.13) with fitness 0.02458
+Evolving generation 33
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 29 individuals with non-finite fitness (971 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3671 remaining)
+Generation 34:
+  Size: 3000
+  Best PID = (kp: 13.18, ki: 9.30, kd: -0.24) with fitness 0.02383
+Evolving generation 34
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 23 individuals with non-finite fitness (977 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3677 remaining)
+Generation 35:
+  Size: 3000
+  Best PID = (kp: 13.55, ki: 9.30, kd: -0.24) with fitness 0.02364
+Evolving generation 35
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 12 individuals with non-finite fitness (988 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3688 remaining)
+Generation 36:
+  Size: 3000
+  Best PID = (kp: 11.23, ki: 10.51, kd: 0.08) with fitness 0.02361
+Evolving generation 36
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 23 individuals with non-finite fitness (977 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3677 remaining)
+Generation 37:
+  Size: 3000
+  Best PID = (kp: 11.23, ki: 10.51, kd: 0.08) with fitness 0.02361
+Evolving generation 37
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 19 individuals with non-finite fitness (981 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3681 remaining)
+Generation 38:
+  Size: 3000
+  Best PID = (kp: 13.27, ki: 10.25, kd: -0.24) with fitness 0.02341
+Evolving generation 38
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 20 individuals with non-finite fitness (980 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3680 remaining)
+Generation 39:
+  Size: 3000
+  Best PID = (kp: 12.26, ki: 10.61, kd: -0.24) with fitness 0.02316
+Evolving generation 39
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 18 individuals with non-finite fitness (982 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3682 remaining)
+Generation 40:
+  Size: 3000
+  Best PID = (kp: 11.57, ki: 11.21, kd: -0.24) with fitness 0.02224
+Evolving generation 40
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 19 individuals with non-finite fitness (981 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3681 remaining)
+Generation 41:
+  Size: 3000
+  Best PID = (kp: 11.57, ki: 11.21, kd: -0.24) with fitness 0.02224
+Evolving generation 41
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 22 individuals with non-finite fitness (978 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3678 remaining)
+Generation 42:
+  Size: 3000
+  Best PID = (kp: 12.85, ki: 12.50, kd: 0.34) with fitness 0.02201
+Evolving generation 42
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 21 individuals with non-finite fitness (979 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3679 remaining)
+Generation 43:
+  Size: 3000
+  Best PID = (kp: 12.08, ki: 11.82, kd: 0.10) with fitness 0.02143
+Evolving generation 43
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 21 individuals with non-finite fitness (979 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3679 remaining)
+Generation 44:
+  Size: 3000
+  Best PID = (kp: 11.52, ki: 12.24, kd: -0.25) with fitness 0.02139
+Evolving generation 44
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 22 individuals with non-finite fitness (978 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3678 remaining)
+Generation 45:
+  Size: 3000
+  Best PID = (kp: 13.04, ki: 12.50, kd: 0.34) with fitness 0.01998
+Evolving generation 45
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 19 individuals with non-finite fitness (981 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3681 remaining)
+Generation 46:
+  Size: 3000
+  Best PID = (kp: 13.04, ki: 12.50, kd: 0.34) with fitness 0.01998
+Evolving generation 46
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 21 individuals with non-finite fitness (979 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3679 remaining)
+Generation 47:
+  Size: 3000
+  Best PID = (kp: 13.04, ki: 12.50, kd: 0.34) with fitness 0.01998
+Evolving generation 47
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 25 individuals with non-finite fitness (975 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3675 remaining)
+Generation 48:
+  Size: 3000
+  Best PID = (kp: 13.41, ki: 13.71, kd: 0.70) with fitness 0.01947
+Evolving generation 48
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 23 individuals with non-finite fitness (977 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3677 remaining)
+Generation 49:
+  Size: 3000
+  Best PID = (kp: 13.41, ki: 13.71, kd: 0.70) with fitness 0.01947
+Evolving generation 49
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 29 individuals with non-finite fitness (971 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3671 remaining)
+Generation 50:
+  Size: 3000
+  Best PID = (kp: 13.41, ki: 13.71, kd: 0.70) with fitness 0.01947
+Evolving generation 50
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 24 individuals with non-finite fitness (976 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3676 remaining)
+Generation 51:
+  Size: 3000
+  Best PID = (kp: 13.41, ki: 13.94, kd: 0.07) with fitness 0.01925
+Evolving generation 51
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 30 individuals with non-finite fitness (970 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3670 remaining)
+Generation 52:
+  Size: 3000
+  Best PID = (kp: 13.41, ki: 13.94, kd: 0.07) with fitness 0.01925
+Evolving generation 52
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 25 individuals with non-finite fitness (975 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3675 remaining)
+Generation 53:
+  Size: 3000
+  Best PID = (kp: 13.41, ki: 13.94, kd: 0.07) with fitness 0.01925
+Evolving generation 53
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 33 individuals with non-finite fitness (967 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3667 remaining)
+Generation 54:
+  Size: 3000
+  Best PID = (kp: 14.14, ki: 14.18, kd: -0.34) with fitness 0.01859
+Evolving generation 54
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 26 individuals with non-finite fitness (974 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3674 remaining)
+Generation 55:
+  Size: 3000
+  Best PID = (kp: 13.84, ki: 14.52, kd: 0.07) with fitness 0.01847
+Evolving generation 55
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 23 individuals with non-finite fitness (977 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3677 remaining)
+Generation 56:
+  Size: 3000
+  Best PID = (kp: 13.84, ki: 14.52, kd: 0.07) with fitness 0.01847
+Evolving generation 56
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 38 individuals with non-finite fitness (962 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3662 remaining)
+Generation 57:
+  Size: 3000
+  Best PID = (kp: 14.18, ki: 13.90, kd: 0.34) with fitness 0.01817
+Evolving generation 57
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 27 individuals with non-finite fitness (973 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3673 remaining)
+Generation 58:
+  Size: 3000
+  Best PID = (kp: 14.21, ki: 14.68, kd: -0.25) with fitness 0.01786
+Evolving generation 58
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 38 individuals with non-finite fitness (962 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3662 remaining)
+Generation 59:
+  Size: 3000
+  Best PID = (kp: 14.21, ki: 14.68, kd: -0.25) with fitness 0.01786
+Evolving generation 59
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 44 individuals with non-finite fitness (956 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3656 remaining)
+Generation 60:
+  Size: 3000
+  Best PID = (kp: 14.62, ki: 14.68, kd: 0.32) with fitness 0.01749
+Evolving generation 60
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 32 individuals with non-finite fitness (968 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3668 remaining)
+Generation 61:
+  Size: 3000
+  Best PID = (kp: 16.13, ki: 14.42, kd: 0.03) with fitness 0.01711
+Evolving generation 61
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 30 individuals with non-finite fitness (970 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3670 remaining)
+Generation 62:
+  Size: 3000
+  Best PID = (kp: 16.13, ki: 14.42, kd: 0.03) with fitness 0.01711
+Evolving generation 62
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 33 individuals with non-finite fitness (967 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3667 remaining)
+Generation 63:
+  Size: 3000
+  Best PID = (kp: 16.13, ki: 14.42, kd: 0.03) with fitness 0.01711
+Evolving generation 63
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 42 individuals with non-finite fitness (958 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3658 remaining)
+Generation 64:
+  Size: 3000
+  Best PID = (kp: 17.10, ki: 15.02, kd: 0.26) with fitness 0.01660
+Evolving generation 64
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 35 individuals with non-finite fitness (965 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3665 remaining)
+Generation 65:
+  Size: 3000
+  Best PID = (kp: 17.10, ki: 15.02, kd: 0.26) with fitness 0.01660
+Evolving generation 65
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 45 individuals with non-finite fitness (955 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3655 remaining)
+Generation 66:
+  Size: 3000
+  Best PID = (kp: 17.10, ki: 15.74, kd: 0.26) with fitness 0.01621
+Evolving generation 66
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 34 individuals with non-finite fitness (966 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3666 remaining)
+Generation 67:
+  Size: 3000
+  Best PID = (kp: 17.10, ki: 15.74, kd: 0.26) with fitness 0.01621
+Evolving generation 67
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 31 individuals with non-finite fitness (969 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3669 remaining)
+Generation 68:
+  Size: 3000
+  Best PID = (kp: 17.10, ki: 15.74, kd: 0.26) with fitness 0.01621
+Evolving generation 68
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 29 individuals with non-finite fitness (971 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3671 remaining)
+Generation 69:
+  Size: 3000
+  Best PID = (kp: 17.10, ki: 15.74, kd: 0.26) with fitness 0.01621
+Evolving generation 69
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 40 individuals with non-finite fitness (960 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3660 remaining)
+Generation 70:
+  Size: 3000
+  Best PID = (kp: 17.10, ki: 15.74, kd: 0.26) with fitness 0.01621
+Evolving generation 70
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 48 individuals with non-finite fitness (952 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3652 remaining)
+Generation 71:
+  Size: 3000
+  Best PID = (kp: 17.10, ki: 15.74, kd: -0.11) with fitness 0.01583
+Evolving generation 71
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 35 individuals with non-finite fitness (965 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3665 remaining)
+Generation 72:
+  Size: 3000
+  Best PID = (kp: 17.10, ki: 15.74, kd: -0.11) with fitness 0.01583
+Evolving generation 72
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 32 individuals with non-finite fitness (968 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3668 remaining)
+Generation 73:
+  Size: 3000
+  Best PID = (kp: 16.91, ki: 16.49, kd: 0.54) with fitness 0.01540
+Evolving generation 73
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 40 individuals with non-finite fitness (960 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3660 remaining)
+Generation 74:
+  Size: 3000
+  Best PID = (kp: 16.91, ki: 16.49, kd: 0.54) with fitness 0.01540
+Evolving generation 74
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 30 individuals with non-finite fitness (970 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3670 remaining)
+Generation 75:
+  Size: 3000
+  Best PID = (kp: 17.45, ki: 16.61, kd: -0.23) with fitness 0.01497
+Evolving generation 75
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 29 individuals with non-finite fitness (971 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3671 remaining)
+Generation 76:
+  Size: 3000
+  Best PID = (kp: 17.45, ki: 16.61, kd: -0.23) with fitness 0.01497
+Evolving generation 76
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 31 individuals with non-finite fitness (969 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3669 remaining)
+Generation 77:
+  Size: 3000
+  Best PID = (kp: 17.45, ki: 16.61, kd: -0.23) with fitness 0.01497
+Evolving generation 77
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 47 individuals with non-finite fitness (953 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3653 remaining)
+Generation 78:
+  Size: 3000
+  Best PID = (kp: 17.45, ki: 16.61, kd: -0.23) with fitness 0.01497
+Evolving generation 78
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 32 individuals with non-finite fitness (968 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3668 remaining)
+Generation 79:
+  Size: 3000
+  Best PID = (kp: 17.45, ki: 16.61, kd: -0.23) with fitness 0.01497
+Evolving generation 79
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 31 individuals with non-finite fitness (969 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3669 remaining)
+Generation 80:
+  Size: 3000
+  Best PID = (kp: 17.45, ki: 16.61, kd: -0.23) with fitness 0.01497
+Evolving generation 80
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 37 individuals with non-finite fitness (963 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3663 remaining)
+Generation 81:
+  Size: 3000
+  Best PID = (kp: 17.88, ki: 17.37, kd: 0.54) with fitness 0.01470
+Evolving generation 81
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 27 individuals with non-finite fitness (973 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3673 remaining)
+Generation 82:
+  Size: 3000
+  Best PID = (kp: 17.45, ki: 17.60, kd: -0.23) with fitness 0.01466
+Evolving generation 82
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 28 individuals with non-finite fitness (972 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3672 remaining)
+Generation 83:
+  Size: 3000
+  Best PID = (kp: 17.45, ki: 17.60, kd: -0.23) with fitness 0.01466
+Evolving generation 83
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 27 individuals with non-finite fitness (973 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3673 remaining)
+Generation 84:
+  Size: 3000
+  Best PID = (kp: 19.60, ki: 16.86, kd: -0.05) with fitness 0.01428
+Evolving generation 84
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 16 individuals with non-finite fitness (984 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3684 remaining)
+Generation 85:
+  Size: 3000
+  Best PID = (kp: 19.60, ki: 16.86, kd: -0.05) with fitness 0.01428
+Evolving generation 85
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 28 individuals with non-finite fitness (972 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3672 remaining)
+Generation 86:
+  Size: 3000
+  Best PID = (kp: 19.60, ki: 16.86, kd: -0.05) with fitness 0.01428
+Evolving generation 86
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 30 individuals with non-finite fitness (970 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3670 remaining)
+Generation 87:
+  Size: 3000
+  Best PID = (kp: 17.81, ki: 18.21, kd: 0.19) with fitness 0.01422
+Evolving generation 87
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 28 individuals with non-finite fitness (972 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3672 remaining)
+Generation 88:
+  Size: 3000
+  Best PID = (kp: 17.81, ki: 18.21, kd: 0.19) with fitness 0.01422
+Evolving generation 88
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 35 individuals with non-finite fitness (965 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3665 remaining)
+Generation 89:
+  Size: 3000
+  Best PID = (kp: 19.26, ki: 17.53, kd: -0.05) with fitness 0.01406
+Evolving generation 89
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 28 individuals with non-finite fitness (972 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3672 remaining)
+Generation 90:
+  Size: 3000
+  Best PID = (kp: 19.26, ki: 17.53, kd: -0.05) with fitness 0.01406
+Evolving generation 90
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 41 individuals with non-finite fitness (959 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3659 remaining)
+Generation 91:
+  Size: 3000
+  Best PID = (kp: 19.26, ki: 17.53, kd: -0.05) with fitness 0.01406
+Evolving generation 91
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 21 individuals with non-finite fitness (979 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3679 remaining)
+Generation 92:
+  Size: 3000
+  Best PID = (kp: 19.26, ki: 17.53, kd: -0.05) with fitness 0.01406
+Evolving generation 92
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 26 individuals with non-finite fitness (974 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3674 remaining)
+Generation 93:
+  Size: 3000
+  Best PID = (kp: 19.26, ki: 17.53, kd: -0.05) with fitness 0.01406
+Evolving generation 93
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 27 individuals with non-finite fitness (973 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3673 remaining)
+Generation 94:
+  Size: 3000
+  Best PID = (kp: 18.91, ki: 18.42, kd: 0.48) with fitness 0.01376
+Evolving generation 94
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 33 individuals with non-finite fitness (967 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3667 remaining)
+Generation 95:
+  Size: 3000
+  Best PID = (kp: 18.91, ki: 18.42, kd: 0.48) with fitness 0.01376
+Evolving generation 95
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 27 individuals with non-finite fitness (973 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3673 remaining)
+Generation 96:
+  Size: 3000
+  Best PID = (kp: 18.91, ki: 18.42, kd: 0.48) with fitness 0.01376
+Evolving generation 96
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 29 individuals with non-finite fitness (971 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3671 remaining)
+Generation 97:
+  Size: 3000
+  Best PID = (kp: 19.61, ki: 18.95, kd: 0.10) with fitness 0.01343
+Evolving generation 97
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 45 individuals with non-finite fitness (955 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3655 remaining)
+Generation 98:
+  Size: 3000
+  Best PID = (kp: 19.61, ki: 18.95, kd: 0.10) with fitness 0.01343
+Evolving generation 98
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 28 individuals with non-finite fitness (972 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3672 remaining)
+Generation 99:
+  Size: 3000
+  Best PID = (kp: 19.61, ki: 18.95, kd: 0.10) with fitness 0.01343
+Evolving generation 99
+Selection by tournament...
+Filtered 0 individuals with non-finite fitness (1000 remaining)
+Filtered 21 individuals with non-finite fitness (979 remaining)
+Replacing...
+Filtered 0 individuals with non-finite fitness (2700 remaining)
+Filtered 0 individuals with non-finite fitness (3679 remaining)
+Generation 100:
+  Size: 3000
+  Best PID = (kp: 19.61, ki: 18.95, kd: 0.10) with fitness 0.01343
+Best individual found: PID = (kp: 19.61, ki: 18.95, kd: 0.10) with fitness 0.01343

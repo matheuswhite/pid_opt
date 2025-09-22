@@ -1,4 +1,10 @@
-use aule::prelude::*;
+use aule::prelude::{
+    AsInput, AsMetric, AsOutput, AsSISO, Euler, IAE, Input, Metric, PID, SISO, SS, Signal, Tf,
+    Time, Writter,
+};
+use std::{f32::consts::PI, time::Duration};
+
+use crate::input::*;
 
 #[derive(Clone)]
 pub struct Individual {
@@ -65,36 +71,32 @@ impl Individual {
     }
 
     pub fn eval_fitness(kp: f32, ki: f32, kd: f32, plotter_en: bool) -> f32 {
-        let k = 1.0;
-        let m = 1.0;
-        let c = 0.2;
-        let time = Time::from((1e-2, 10.0));
+        let time = Time::from((1e-2, 6.0));
 
-        let mut input = Step::new();
-        let mut itae = ITAE::new();
-        let mut pid = PID::new(kp, ki, kd);
-        let mut plant: SS<Euler> = Tf::new(&[1.0/m], &[1.0, c/m, k/m]).into();
-        let mut plotter = if plotter_en { Some(Plotter::new()) } else { None };
+        let inputs: [(&'static str, Box<dyn Input>); _] = [
+            ("step", Box::new(Step::new(1.0))),
+            ("sinusoidal", Box::new(Sinusoidal::new(2.0 * PI, 1.0, 0.0))),
+            ("square", Box::new(Square::new(2.0 * PI, 1.0, 0.0))),
+            ("sawtooth", Box::new(Sawtooth::new(2.0 * PI, 1.0, 0.0))),
+            ("random", Box::new(Random::new(0.0, 1.0, PI, 2.0 * PI))),
+        ];
+        let mut sims = inputs.map(|(name, input)| {
+            let name = if plotter_en {
+                Some(name.to_string())
+            } else {
+                None
+            };
+            Simulation::new(kp, ki, kd, input, name)
+        });
 
         for dt in time {
-            let signal = (dt >> input.as_input()) * 10.0;
-            let error = signal - plant.last_output();
-            let control_signal = pid.as_siso() * error;
-            let output = control_signal * plant.as_siso();
-
-            let _ = error >> itae.as_error_metric();
-
-            if let Some(plotter) = &mut plotter {
-                let _ = (output) >> plotter.as_monitor();
+            for sim in sims.iter_mut() {
+                let _ = dt >> sim.as_input();
             }
         }
 
-        if let Some(plotter) = &mut plotter {
-            plotter.display();
-            plotter.join();
-        }
-
-        itae.value()
+        let iae_value_sum = sims.iter().map(|sim| sim.iae_value()).sum::<f32>();
+        iae_value_sum / sims.len() as f32
     }
 
     pub fn kp(&self) -> f32 {
@@ -129,3 +131,50 @@ impl PartialOrd for Individual {
         self.fitness.partial_cmp(&other.fitness)
     }
 }
+
+struct Simulation {
+    input: Box<dyn Input>,
+    iae: IAE,
+    pid: PID,
+    plant: SS<Euler>,
+    writter: Option<Writter>,
+}
+
+impl Simulation {
+    pub fn new(kp: f32, ki: f32, kd: f32, input: Box<dyn Input>, name: Option<String>) -> Self {
+        let k = 1.0;
+        let a = 1.0;
+
+        Self {
+            input,
+            iae: IAE::new(),
+            pid: PID::new(kp, ki, kd),
+            plant: Tf::new(&[k], &[1.0, k * a]).into(),
+            writter: name
+                .map(|name| Writter::new(&format!("output/{}.csv", name), ["input", "output"])),
+        }
+    }
+
+    pub fn iae_value(&self) -> f32 {
+        self.iae.value()
+    }
+}
+
+impl Input for Simulation {
+    fn output(&mut self, dt: Duration) -> Signal {
+        let signal = dt >> &mut *self.input;
+        let error = signal - self.plant.last_output();
+        let control_signal = self.pid.as_siso() * error;
+        let output = control_signal * self.plant.as_siso();
+
+        let _ = error >> self.iae.as_metric();
+
+        if let Some(writter) = &mut self.writter {
+            let _ = (signal, output) >> writter.as_output();
+        }
+
+        output
+    }
+}
+
+impl AsInput for Simulation {}
