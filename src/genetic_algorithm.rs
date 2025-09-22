@@ -37,7 +37,7 @@ impl GeneticAlgorithmBuilder {
 }
 
 impl GeneticAlgorithm {
-    const MUTATION_STEP: f32 = 5.0;
+    const MUTATION_STEP: f32 = 1.0;
 
     pub fn generation(&self) -> usize {
         self.generation
@@ -61,7 +61,17 @@ impl GeneticAlgorithm {
 
             let winner = fighters
                 .into_iter()
-                .max_by(|a, b| b.partial_cmp(a).unwrap())
+                .max_by(|a, b| {
+                    let res = b.partial_cmp(a);
+                    if res.is_none() {
+                        println!(
+                            "Warning: NaN fitness detected during tournament selection: {} vs {}",
+                            a.fitness(),
+                            b.fitness()
+                        );
+                    }
+                    res.unwrap()
+                })
                 .unwrap();
 
             selected.push(winner.clone());
@@ -93,7 +103,7 @@ impl GeneticAlgorithm {
             let children = father.crossover(&mother);
             all_children.extend(children);
 
-            progress_bar("crossover".to_string(), i + 1, total_crossovers);
+            // progress_bar("crossover".to_string(), i + 1, total_crossovers);
         }
 
         let children_count = all_children.len();
@@ -101,7 +111,7 @@ impl GeneticAlgorithm {
             .into_iter()
             .enumerate()
             .map(|(i, child)| {
-                progress_bar("mutation".to_string(), i + 1, children_count);
+                // progress_bar("mutation".to_string(), i + 1, children_count);
 
                 child.mutate(mutation_rate, Self::MUTATION_STEP)
             })

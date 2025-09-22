@@ -1,4 +1,5 @@
 use aule::prelude::*;
+use typst::foundations::IntoValue;
 
 #[derive(Clone)]
 pub struct Individual {
@@ -6,6 +7,18 @@ pub struct Individual {
     ki: f32,
     kd: f32,
     fitness: f32,
+}
+
+impl IntoValue for Individual {
+    fn into_value(self) -> typst::foundations::Value {
+        let d = typst::foundations::dict!(
+            "kp" => format!("{:?}", self.kp).into_value(),
+            "ki" => format!("{:?}", self.ki).into_value(),
+            "kd" => format!("{:?}", self.kd).into_value(),
+            "fitness" => format!("{:?}", self.fitness).into_value(),
+        );
+        typst::foundations::Value::Dict(d)
+    }
 }
 
 impl Individual {
@@ -65,24 +78,25 @@ impl Individual {
     }
 
     pub fn eval_fitness(kp: f32, ki: f32, kd: f32, plotter_en: bool) -> f32 {
-        let k = 1.0;
-        let m = 1.0;
-        let c = 0.2;
-        let time = Time::from((1e-2, 10.0));
+        let time = Time::from((1e-4, 10.0));
 
         let mut input = Step::new();
-        let mut itae = ITAE::new();
+        let mut good_hart = GoodHart::new(0.3, 0.3, 0.4);
         let mut pid = PID::new(kp, ki, kd);
-        let mut plant: SS<Euler> = Tf::new(&[1.0/m], &[1.0, c/m, k/m]).into();
-        let mut plotter = if plotter_en { Some(Plotter::new()) } else { None };
+        let mut plant: SS<Euler> = Tf::new(&[-0.3183, 1.0], &[1.013e-1, 0.0318, 1.0]).into();
+        let mut plotter = if plotter_en {
+            Some(Plotter::new())
+        } else {
+            None
+        };
 
         for dt in time {
-            let signal = (dt >> input.as_input()) * 10.0;
+            let signal = dt >> input.as_input();
             let error = signal - plant.last_output();
             let control_signal = pid.as_siso() * error;
             let output = control_signal * plant.as_siso();
 
-            let _ = error >> itae.as_error_metric();
+            let _ = (error, control_signal) >> good_hart.as_error_metric();
 
             if let Some(plotter) = &mut plotter {
                 let _ = (output) >> plotter.as_monitor();
@@ -94,7 +108,7 @@ impl Individual {
             plotter.join();
         }
 
-        itae.value()
+        good_hart.value()
     }
 
     pub fn kp(&self) -> f32 {
