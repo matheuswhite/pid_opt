@@ -154,15 +154,15 @@ impl Input for Random {
         let mut amplitude = *self.current_amplitude.get_or_insert(self.new_amplitude());
         let period = *self.current_period.get_or_insert(self.new_period());
 
-        let mut phase = (t % period) / period;
+        let phase = t / period;
         if phase >= 1.0 {
             amplitude = *self.current_amplitude.insert(self.new_amplitude());
             self.current_period = Some(self.new_period());
-            phase = 0.0;
+            self.time = Duration::ZERO;
         }
 
         Signal {
-            value: amplitude * phase,
+            value: amplitude,
             dt,
         }
     }

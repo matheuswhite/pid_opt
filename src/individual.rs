@@ -1,6 +1,6 @@
 use aule::prelude::{
-    AsInput, AsMetric, AsOutput, AsSISO, Euler, IAE, Input, Metric, PID, SISO, SS, Signal, Tf,
-    Time, Writter,
+    AsInput, AsMetric, AsOutput, AsSISO, Euler, GoodHart, IAE, ITAE, Input, Metric, PID, SISO, SS,
+    Signal, Tf, Time, Writter,
 };
 use std::{f32::consts::PI, time::Duration};
 
@@ -75,10 +75,13 @@ impl Individual {
 
         let inputs: [(&'static str, Box<dyn Input>); _] = [
             ("step", Box::new(Step::new(1.0))),
-            ("sinusoidal", Box::new(Sinusoidal::new(2.0 * PI, 1.0, 0.0))),
-            ("square", Box::new(Square::new(2.0 * PI, 1.0, 0.0))),
-            ("sawtooth", Box::new(Sawtooth::new(2.0 * PI, 1.0, 0.0))),
-            ("random", Box::new(Random::new(0.0, 1.0, PI, 2.0 * PI))),
+            ("sinusoidal", Box::new(Sinusoidal::new(PI / 2.0, 1.0, 0.0))),
+            ("square", Box::new(Square::new(PI / 2.0, 1.0, 0.0))),
+            ("sawtooth", Box::new(Sawtooth::new(PI / 2.0, 1.0, 0.0))),
+            (
+                "random",
+                Box::new(Random::new(0.0, 1.0, PI / 4.0, PI / 2.0)),
+            ),
         ];
         let mut sims = inputs.map(|(name, input)| {
             let name = if plotter_en {
@@ -90,13 +93,16 @@ impl Individual {
         });
 
         for dt in time {
-            for sim in sims.iter_mut() {
-                let _ = dt >> sim.as_input();
+            if plotter_en {
+                for sim in sims.iter_mut() {
+                    let _ = dt >> sim.as_input();
+                }
+            } else {
+                let _ = dt >> sims[2].as_input();
             }
         }
 
-        let iae_value_sum = sims.iter().map(|sim| sim.iae_value()).sum::<f32>();
-        iae_value_sum / sims.len() as f32
+        sims[2].error_metric_value()
     }
 
     pub fn kp(&self) -> f32 {
@@ -134,7 +140,7 @@ impl PartialOrd for Individual {
 
 struct Simulation {
     input: Box<dyn Input>,
-    iae: IAE,
+    error_metric: ITAE,
     pid: PID,
     plant: SS<Euler>,
     writter: Option<Writter>,
@@ -147,7 +153,7 @@ impl Simulation {
 
         Self {
             input,
-            iae: IAE::new(),
+            error_metric: ITAE::new(),
             pid: PID::new(kp, ki, kd),
             plant: Tf::new(&[k], &[1.0, k * a]).into(),
             writter: name
@@ -155,8 +161,8 @@ impl Simulation {
         }
     }
 
-    pub fn iae_value(&self) -> f32 {
-        self.iae.value()
+    pub fn error_metric_value(&self) -> f32 {
+        self.error_metric.value()
     }
 }
 
@@ -167,7 +173,7 @@ impl Input for Simulation {
         let control_signal = self.pid.as_siso() * error;
         let output = control_signal * self.plant.as_siso();
 
-        let _ = error >> self.iae.as_metric();
+        let _ = error >> self.error_metric.as_metric();
 
         if let Some(writter) = &mut self.writter {
             let _ = (signal, output) >> writter.as_output();
