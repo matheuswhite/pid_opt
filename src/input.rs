@@ -1,4 +1,4 @@
-use aule::prelude::{AsInput, Input, Signal};
+use aule::prelude::{Input, Signal};
 use std::{f32::consts::PI, time::Duration};
 
 pub struct Step {

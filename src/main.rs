@@ -17,7 +17,7 @@ fn main() {
     println!("Generating initial population...");
 
     let mut ga = GeneticAlgorithmBuilder::default()
-        .with_population_size(5_000)
+        .with_population_size(2_000)
         .with_parallel_works(4)
         .build();
 
@@ -34,7 +34,7 @@ fn main() {
         best_individual = Some(best.clone());
 
         println!(
-            "Generation {}:\n  Size: {}\n  Best PID = (kp: {:.2}, ki: {:.2}, kd: {:.2}) with fitness {:.5}",
+            "Generation {}:\n  Size: {}\n  Best PID = (kp: {:.3}, ki: {:.3}, kd: {:.3}) with fitness {:.5}",
             ga.generation(),
             ga.len(),
             best.kp(),

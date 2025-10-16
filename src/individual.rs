@@ -1,6 +1,6 @@
 use aule::prelude::{
-    AsInput, AsMetric, AsOutput, AsSISO, Euler, GoodHart, IAE, ITAE, Input, Metric, PID, SISO, SS,
-    Signal, Tf, Time, Writter,
+    AsInput, AsMetric, AsOutput, AsSISO, Euler, ITAE, Input, Metric, PID, SISO, SS, Signal, Tf,
+    Time, Writter,
 };
 use std::{f32::consts::PI, time::Duration};
 
@@ -98,11 +98,12 @@ impl Individual {
                     let _ = dt >> sim.as_input();
                 }
             } else {
+                let _ = dt >> sims[0].as_input();
                 let _ = dt >> sims[2].as_input();
             }
         }
 
-        sims[2].error_metric_value()
+        (sims[0].error_metric_value() + sims[2].error_metric_value()) / 2.0
     }
 
     pub fn kp(&self) -> f32 {
