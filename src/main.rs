@@ -17,16 +17,16 @@ fn main() {
     println!("Generating initial population...");
 
     let mut ga = GeneticAlgorithmBuilder::default()
-        .with_population_size(2_000)
+        .with_population_size(1_000)
         .with_parallel_works(4)
         .build();
 
     let mut best_individual = None;
-    let generations = Time::from((1.0, 500.0));
+    let generations = Time::from((1.0, 100.0));
 
     for _ in generations {
         println!("Evolving generation {}", ga.generation());
-        let Some(best) = ga.eval(0.3, 0.1) else {
+        let Some(best) = ga.eval(0.5, 0.3) else {
             println!("No best individual found in this generation.");
             break;
         };

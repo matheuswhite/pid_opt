@@ -49,19 +49,19 @@ impl Individual {
                 0.0
             };
 
-        let ki = self.ki
-            + if rand::random::<f32>() < mutation_rate {
-                lerp(rand::random::<f32>(), -mutation_step, mutation_step)
-            } else {
-                0.0
-            };
+        let ki = self.ki;
+        // + if rand::random::<f32>() < mutation_rate {
+        //     lerp(rand::random::<f32>(), -mutation_step, mutation_step)
+        // } else {
+        //     0.0
+        // };
 
-        let kd = self.kd
-            + if rand::random::<f32>() < mutation_rate {
-                lerp(rand::random::<f32>(), -mutation_step, mutation_step)
-            } else {
-                0.0
-            };
+        let kd = self.kd;
+        // + if rand::random::<f32>() < mutation_rate {
+        //     lerp(rand::random::<f32>(), -mutation_step, mutation_step)
+        // } else {
+        //     0.0
+        // };
 
         Individual::new(kp, ki, kd)
     }
@@ -99,11 +99,10 @@ impl Individual {
                 }
             } else {
                 let _ = dt >> sims[0].as_input();
-                let _ = dt >> sims[2].as_input();
             }
         }
 
-        (sims[0].error_metric_value() + sims[2].error_metric_value()) / 2.0
+        sims[0].error_metric_value()
     }
 
     pub fn kp(&self) -> f32 {
@@ -149,14 +148,16 @@ struct Simulation {
 
 impl Simulation {
     pub fn new(kp: f32, ki: f32, kd: f32, input: Box<dyn Input>, name: Option<String>) -> Self {
-        let k = 1.0;
-        let a = 1.0;
+        // let k = 1.0;
+        // let a = 1.0;
+        // let tf_motor = Tf::new(&[k], &[1.0, k * a]).into();
+        let tf_complex = Tf::new(&[-0.3183, 1.0], &[1.013e-1, 0.0318, 1.0]).into();
 
         Self {
             input,
             error_metric: ITAE::new(),
             pid: PID::new(kp, ki, kd),
-            plant: Tf::new(&[k], &[1.0, k * a]).into(),
+            plant: tf_complex,
             writter: name
                 .map(|name| Writter::new(&format!("output/{}.csv", name), ["input", "output"])),
         }

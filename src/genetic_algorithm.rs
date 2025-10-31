@@ -37,7 +37,7 @@ impl GeneticAlgorithmBuilder {
 }
 
 impl GeneticAlgorithm {
-    const MUTATION_STEP: f32 = 1.0;
+    const MUTATION_STEP: f32 = 0.1;
 
     pub fn generation(&self) -> usize {
         self.generation
@@ -95,26 +95,18 @@ impl GeneticAlgorithm {
 
         let mut all_children = vec![];
         let total_crossovers = to_reproduce.len() / 2;
-        for i in 0..total_crossovers {
+        for _ in 0..total_crossovers {
             let Some((father, mother)) = to_reproduce.pop_parents() else {
                 break;
             };
 
             let children = father.crossover(&mother);
             all_children.extend(children);
-
-            // progress_bar("crossover".to_string(), i + 1, total_crossovers);
         }
 
-        let children_count = all_children.len();
         let all_children = all_children
             .into_iter()
-            .enumerate()
-            .map(|(i, child)| {
-                // progress_bar("mutation".to_string(), i + 1, children_count);
-
-                child.mutate(mutation_rate, Self::MUTATION_STEP)
-            })
+            .map(|child| child.mutate(mutation_rate, Self::MUTATION_STEP))
             .collect::<Vec<_>>()
             .into();
 

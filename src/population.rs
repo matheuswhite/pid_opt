@@ -102,9 +102,9 @@ struct NewRandomPopulation {
 }
 
 impl NewRandomPopulation {
-    const MAX_KP: f32 = 5.0;
-    const MAX_KI: f32 = 5.0;
-    const MAX_KD: f32 = 1.0;
+    const MAX_KP: f32 = 1000.0;
+    const MAX_KI: f32 = 0.0;
+    const MAX_KD: f32 = 0.00;
 }
 
 impl Work for NewRandomPopulation {
