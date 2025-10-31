@@ -1,6 +1,6 @@
 use std::process::Command;
 
-use crate::genetic_algorithm::GeneticAlgorithmBuilder;
+use crate::{genetic_algorithm::GeneticAlgorithmBuilder, individual::Model};
 use aule::prelude::*;
 
 mod genetic_algorithm;
@@ -17,16 +17,17 @@ fn main() {
     println!("Generating initial population...");
 
     let mut ga = GeneticAlgorithmBuilder::default()
-        .with_population_size(2_000)
+        .with_population_size(1_000)
         .with_parallel_works(4)
+        .with_model(Model::Complex)
         .build();
 
     let mut best_individual = None;
-    let generations = Time::from((1.0, 500.0));
+    let generations = Time::from((1.0, 200.0));
 
     for _ in generations {
         println!("Evolving generation {}", ga.generation());
-        let Some(best) = ga.eval(0.3, 0.1) else {
+        let Some(best) = ga.eval(0.5, 0.3) else {
             println!("No best individual found in this generation.");
             break;
         };
@@ -34,7 +35,7 @@ fn main() {
         best_individual = Some(best.clone());
 
         println!(
-            "Generation {}:\n  Size: {}\n  Best PID = (kp: {:.3}, ki: {:.3}, kd: {:.3}) with fitness {:.5}",
+            "Generation {}:\n  Size: {}\n  Best PID = (kp: {:.5}, ki: {:.5}, kd: {:.5}) with fitness {:.5}",
             ga.generation(),
             ga.len(),
             best.kp(),
@@ -46,7 +47,7 @@ fn main() {
 
     if let Some(best) = best_individual {
         println!(
-            "Best individual found: PID = (kp: {:.2}, ki: {:.2}, kd: {:.2}) with fitness {:.5}",
+            "Best individual found: PID = (kp: {:.5}, ki: {:.5}, kd: {:.5}) with fitness {:.5}",
             best.kp(),
             best.ki(),
             best.kd(),

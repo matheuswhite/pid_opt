@@ -1,10 +1,14 @@
-use aule::prelude::{
-    AsInput, AsMetric, AsOutput, AsSISO, Euler, ITAE, Input, Metric, PID, SISO, SS, Signal, Tf,
-    Time, Writter,
-};
+use aule::prelude::*;
 use std::{f32::consts::PI, time::Duration};
 
-use crate::input::*;
+use crate::input;
+
+#[derive(Clone, Copy, Default)]
+pub enum Model {
+    #[default]
+    DCMotor,
+    Complex,
+}
 
 #[derive(Clone)]
 pub struct Individual {
@@ -12,32 +16,56 @@ pub struct Individual {
     ki: f32,
     kd: f32,
     fitness: f32,
+    model: Model,
+}
+
+// father: 0.123124  mother: 0.567890 digit: 2 and random = father -> (0.003000, 0.007000)
+fn crossover_digit(father: f32, mother: f32, digit: u32) -> (f32, f32) {
+    let factor = 10f32.powi(-(digit as i32 + 1));
+    let father_digit = ((father / factor) as u32 % 10) as f32;
+    let mother_digit = ((mother / factor) as u32 % 10) as f32;
+
+    let (d1, d2) = if rand::random::<f32>() <= 0.5 {
+        (father_digit, mother_digit)
+    } else {
+        (mother_digit, father_digit)
+    };
+
+    (d1 * factor, d2 * factor)
+}
+
+fn crossover_float(father: f32, mother: f32) -> (f32, f32) {
+    let mut child1 = 0.0;
+    let mut child2 = 0.0;
+
+    for digit in 0..5 {
+        let (result1, result2) = crossover_digit(father, mother, digit);
+        child1 += result1;
+        child2 += result2;
+    }
+
+    (child1, child2)
 }
 
 impl Individual {
-    pub fn new(kp: f32, ki: f32, kd: f32) -> Self {
+    pub fn new(kp: f32, ki: f32, kd: f32, model: Model) -> Self {
         Self {
             kp,
             ki,
             kd,
-            fitness: Self::eval_fitness(kp, ki, kd, false),
+            fitness: Self::eval_fitness(kp, ki, kd, false, model),
+            model,
         }
     }
 
     pub fn crossover(&self, other: &Individual) -> Vec<Individual> {
-        let (kp1, kp2) = (rand::random::<f32>() <= 0.5)
-            .then(|| (self.kp, other.kp))
-            .unwrap_or((self.kp, other.kp));
-        let (ki1, ki2) = (rand::random::<f32>() <= 0.5)
-            .then(|| (self.ki, other.ki))
-            .unwrap_or((self.ki, other.ki));
-        let (kd1, kd2) = (rand::random::<f32>() <= 0.5)
-            .then(|| (self.kd, other.kd))
-            .unwrap_or((self.kd, other.kd));
+        let (kp1, kp2) = crossover_float(self.kp, other.kp);
+        let (ki1, ki2) = crossover_float(self.ki, other.ki);
+        let (kd1, kd2) = crossover_float(self.kd, other.kd);
 
         vec![
-            Individual::new(kp1, ki1, kd1),
-            Individual::new(kp2, ki2, kd2),
+            Individual::new(kp1, ki1, kd1, self.model),
+            Individual::new(kp2, ki2, kd2, self.model),
         ]
     }
 
@@ -63,24 +91,30 @@ impl Individual {
                 0.0
             };
 
-        Individual::new(kp, ki, kd)
+        Individual::new(kp.max(0.0), ki.max(0.0), kd.max(0.0), self.model)
     }
 
     pub fn show(&self) {
-        Self::eval_fitness(self.kp, self.ki, self.kd, true);
+        Self::eval_fitness(self.kp, self.ki, self.kd, true, self.model);
     }
 
-    pub fn eval_fitness(kp: f32, ki: f32, kd: f32, plotter_en: bool) -> f32 {
+    pub fn eval_fitness(kp: f32, ki: f32, kd: f32, plotter_en: bool, model: Model) -> f32 {
         let time = Time::from((1e-2, 6.0));
 
         let inputs: [(&'static str, Box<dyn Input>); _] = [
-            ("step", Box::new(Step::new(1.0))),
-            ("sinusoidal", Box::new(Sinusoidal::new(PI / 2.0, 1.0, 0.0))),
-            ("square", Box::new(Square::new(PI / 2.0, 1.0, 0.0))),
-            ("sawtooth", Box::new(Sawtooth::new(PI / 2.0, 1.0, 0.0))),
+            ("step", Box::new(input::Step::new(1.0))),
+            (
+                "sinusoidal",
+                Box::new(input::Sinusoidal::new(PI / 2.0, 1.0, 0.0)),
+            ),
+            ("square", Box::new(input::Square::new(PI / 2.0, 1.0, 0.0))),
+            (
+                "sawtooth",
+                Box::new(input::Sawtooth::new(PI / 2.0, 1.0, 0.0)),
+            ),
             (
                 "random",
-                Box::new(Random::new(0.0, 1.0, PI / 4.0, PI / 2.0)),
+                Box::new(input::Random::new(0.0, 1.0, PI / 4.0, PI / 2.0)),
             ),
         ];
         let mut sims = inputs.map(|(name, input)| {
@@ -89,7 +123,7 @@ impl Individual {
             } else {
                 None
             };
-            Simulation::new(kp, ki, kd, input, name)
+            Simulation::new(kp, ki, kd, input, name, model)
         });
 
         for dt in time {
@@ -99,11 +133,10 @@ impl Individual {
                 }
             } else {
                 let _ = dt >> sims[0].as_input();
-                let _ = dt >> sims[2].as_input();
             }
         }
 
-        (sims[0].error_metric_value() + sims[2].error_metric_value()) / 2.0
+        sims[0].error_metric_value()
     }
 
     pub fn kp(&self) -> f32 {
@@ -141,22 +174,34 @@ impl PartialOrd for Individual {
 
 struct Simulation {
     input: Box<dyn Input>,
-    error_metric: ITAE,
+    error_metric: IAE,
     pid: PID,
     plant: SS<Euler>,
     writter: Option<Writter>,
 }
 
 impl Simulation {
-    pub fn new(kp: f32, ki: f32, kd: f32, input: Box<dyn Input>, name: Option<String>) -> Self {
+    pub fn new(
+        kp: f32,
+        ki: f32,
+        kd: f32,
+        input: Box<dyn Input>,
+        name: Option<String>,
+        model: Model,
+    ) -> Self {
         let k = 1.0;
         let a = 1.0;
+        let tf_motor = Tf::new(&[k], &[1.0, k * a]).into();
+        let tf_complex = Tf::new(&[-0.3183, 1.0], &[1.013e-1, 0.0318, 1.0]).into();
 
         Self {
             input,
-            error_metric: ITAE::new(),
+            error_metric: IAE::new(),
             pid: PID::new(kp, ki, kd),
-            plant: Tf::new(&[k], &[1.0, k * a]).into(),
+            plant: match model {
+                Model::DCMotor => tf_motor,
+                Model::Complex => tf_complex,
+            },
             writter: name
                 .map(|name| Writter::new(&format!("output/{}.csv", name), ["input", "output"])),
         }

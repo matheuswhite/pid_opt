@@ -8,9 +8,9 @@ pub trait Work {
     fn set_id(&mut self, id: usize);
 }
 
-pub fn work_pool<I, O, W>(size: usize, mut input: Vec<I>, _work: W) -> Vec<O>
+pub fn work_pool<I, O, W>(size: usize, mut input: Vec<I>, work: W) -> Vec<O>
 where
-    W: Work<Input = I, Output = O> + Send + 'static + Default,
+    W: Work<Input = I, Output = O> + Send + 'static + Clone,
     I: Send + 'static,
     O: Send + 'static,
 {
@@ -18,7 +18,7 @@ where
     let mut id = 0;
     while !input.is_empty() {
         let chunk = input.drain(..size.min(input.len())).collect::<Vec<_>>();
-        let mut work = W::default();
+        let mut work = work.clone();
         work.set_id(id);
         let handle: JoinHandle<Vec<O>> = std::thread::spawn(move || work.work(chunk));
         handles.push(handle);

@@ -1,15 +1,18 @@
-use crate::{individual::Individual, population::Population};
+use crate::{
+    individual::{Individual, Model},
+    population::Population,
+};
 
 pub struct GeneticAlgorithm {
     population: Population,
     generation: usize,
-    parallel_works: usize,
 }
 
 #[derive(Default)]
 pub struct GeneticAlgorithmBuilder {
     population_size: usize,
     parellel_works: usize,
+    model: Model,
 }
 
 impl GeneticAlgorithmBuilder {
@@ -23,21 +26,25 @@ impl GeneticAlgorithmBuilder {
         self
     }
 
+    pub fn with_model(mut self, model: Model) -> Self {
+        self.model = model;
+        self
+    }
+
     pub fn build(self) -> GeneticAlgorithm {
         GeneticAlgorithm {
             population: if self.parellel_works == 0 {
-                Population::new(self.population_size)
+                Population::new(self.population_size, self.model)
             } else {
-                Population::new_parallel(self.population_size, self.parellel_works)
+                Population::new_parallel(self.population_size, self.parellel_works, self.model)
             },
             generation: 0,
-            parallel_works: self.parellel_works,
         }
     }
 }
 
 impl GeneticAlgorithm {
-    const MUTATION_STEP: f32 = 1.0;
+    const MUTATION_STEP: f32 = 0.01;
 
     pub fn generation(&self) -> usize {
         self.generation
@@ -95,26 +102,18 @@ impl GeneticAlgorithm {
 
         let mut all_children = vec![];
         let total_crossovers = to_reproduce.len() / 2;
-        for i in 0..total_crossovers {
+        for _ in 0..total_crossovers {
             let Some((father, mother)) = to_reproduce.pop_parents() else {
                 break;
             };
 
             let children = father.crossover(&mother);
             all_children.extend(children);
-
-            // progress_bar("crossover".to_string(), i + 1, total_crossovers);
         }
 
-        let children_count = all_children.len();
         let all_children = all_children
             .into_iter()
-            .enumerate()
-            .map(|(i, child)| {
-                // progress_bar("mutation".to_string(), i + 1, children_count);
-
-                child.mutate(mutation_rate, Self::MUTATION_STEP)
-            })
+            .map(|child| child.mutate(mutation_rate, Self::MUTATION_STEP))
             .collect::<Vec<_>>()
             .into();
 

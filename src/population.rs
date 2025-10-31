@@ -1,5 +1,5 @@
 use crate::{
-    individual::Individual,
+    individual::{Individual, Model},
     work::{Work, work_pool},
 };
 
@@ -9,17 +9,17 @@ pub struct Population {
 }
 
 impl Population {
-    pub fn new(size: usize) -> Self {
-        let individuals = NewRandomPopulation::default().work((0..size).map(|_| ()).collect());
+    pub fn new(size: usize, model: Model) -> Self {
+        let individuals = NewRandomPopulation::new(model).work((0..size).map(|_| ()).collect());
 
         Self { individuals }.sorted()
     }
 
-    pub fn new_parallel(size: usize, works: usize) -> Self {
+    pub fn new_parallel(size: usize, works: usize, model: Model) -> Self {
         let individuals = work_pool(
             works,
             (0..size).map(|_| ()).collect(),
-            NewRandomPopulation::default(),
+            NewRandomPopulation::new(model),
         );
 
         Self { individuals }.sorted()
@@ -96,15 +96,20 @@ impl From<Vec<Individual>> for Population {
     }
 }
 
-#[derive(Default)]
+#[derive(Clone)]
 struct NewRandomPopulation {
     id: usize,
+    model: Model,
 }
 
 impl NewRandomPopulation {
-    const MAX_KP: f32 = 5.0;
-    const MAX_KI: f32 = 5.0;
-    const MAX_KD: f32 = 1.0;
+    const MAX_KP: f32 = 0.9;
+    const MAX_KI: f32 = 0.0;
+    const MAX_KD: f32 = 0.9;
+
+    pub fn new(model: Model) -> Self {
+        Self { id: 0, model }
+    }
 }
 
 impl Work for NewRandomPopulation {
@@ -118,7 +123,7 @@ impl Work for NewRandomPopulation {
             let kp = rand::random::<f32>() * Self::MAX_KP;
             let ki = rand::random::<f32>() * Self::MAX_KI;
             let kd = rand::random::<f32>() * Self::MAX_KD;
-            individuals.push(Individual::new(kp, ki, kd));
+            individuals.push(Individual::new(kp, ki, kd, self.model));
         }
 
         individuals
