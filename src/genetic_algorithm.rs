@@ -44,7 +44,7 @@ impl GeneticAlgorithmBuilder {
 }
 
 impl GeneticAlgorithm {
-    const MUTATION_STEP: f32 = 0.01;
+    const MUTATION_STEP: f32 = 0.2;
 
     pub fn generation(&self) -> usize {
         self.generation

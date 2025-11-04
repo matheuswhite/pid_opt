@@ -38,7 +38,7 @@ fn crossover_float(father: f32, mother: f32) -> (f32, f32) {
     let mut child1 = 0.0;
     let mut child2 = 0.0;
 
-    for digit in 0..5 {
+    for digit in 0..10 {
         let (result1, result2) = crossover_digit(father, mother, digit);
         child1 += result1;
         child2 += result2;
@@ -99,22 +99,22 @@ impl Individual {
     }
 
     pub fn eval_fitness(kp: f32, ki: f32, kd: f32, plotter_en: bool, model: Model) -> f32 {
-        let time = Time::from((1e-2, 6.0));
+        let time = Time::from((1e-2, 8.0 * PI));
 
         let inputs: [(&'static str, Box<dyn Input>); _] = [
             ("step", Box::new(input::Step::new(1.0))),
             (
                 "sinusoidal",
-                Box::new(input::Sinusoidal::new(PI / 2.0, 1.0, 0.0)),
+                Box::new(input::Sinusoidal::new(2.0 * PI, 1.0, 0.0)),
             ),
-            ("square", Box::new(input::Square::new(PI / 2.0, 1.0, 0.0))),
+            ("square", Box::new(input::Square::new(2.0 * PI, 1.0, 0.0))),
             (
                 "sawtooth",
-                Box::new(input::Sawtooth::new(PI / 2.0, 1.0, 0.0)),
+                Box::new(input::Sawtooth::new(2.0 * PI, 1.0, 0.0)),
             ),
             (
                 "random",
-                Box::new(input::Random::new(0.0, 1.0, PI / 4.0, PI / 2.0)),
+                Box::new(input::Random::new(0.0, 1.0, 2.0 * PI, 2.5 * PI)),
             ),
         ];
         let mut sims = inputs.map(|(name, input)| {
@@ -132,11 +132,11 @@ impl Individual {
                     let _ = dt >> sim.as_input();
                 }
             } else {
-                let _ = dt >> sims[0].as_input();
+                let _ = dt >> sims[2].as_input();
             }
         }
 
-        sims[0].error_metric_value()
+        sims[2].error_metric_value()
     }
 
     pub fn kp(&self) -> f32 {

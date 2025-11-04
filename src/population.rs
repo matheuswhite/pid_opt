@@ -44,7 +44,7 @@ impl Population {
         );
         self.individuals = inds;
         self.individuals.sort_by(|a, b| a.partial_cmp(b).unwrap());
-        self.individuals.drain(3_000.min(self.individuals.len())..);
+        self.individuals.drain(1_000.min(self.individuals.len())..);
         self
     }
 

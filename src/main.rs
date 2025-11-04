@@ -23,11 +23,11 @@ fn main() {
         .build();
 
     let mut best_individual = None;
-    let generations = Time::from((1.0, 200.0));
+    let generations = Time::from((1.0, 100.0));
 
     for _ in generations {
         println!("Evolving generation {}", ga.generation());
-        let Some(best) = ga.eval(0.5, 0.3) else {
+        let Some(best) = ga.eval(0.75, 0.3) else {
             println!("No best individual found in this generation.");
             break;
         };
@@ -35,7 +35,7 @@ fn main() {
         best_individual = Some(best.clone());
 
         println!(
-            "Generation {}:\n  Size: {}\n  Best PID = (kp: {:.5}, ki: {:.5}, kd: {:.5}) with fitness {:.5}",
+            "Generation {}:\n  Size: {}\n  Best PID = (kp: {:.10}, ki: {:.10}, kd: {:.10}) with fitness {:.10}",
             ga.generation(),
             ga.len(),
             best.kp(),
@@ -47,7 +47,7 @@ fn main() {
 
     if let Some(best) = best_individual {
         println!(
-            "Best individual found: PID = (kp: {:.5}, ki: {:.5}, kd: {:.5}) with fitness {:.5}",
+            "Best individual found: PID = (kp: {:.10}, ki: {:.10}, kd: {:.10}) with fitness {:.10}",
             best.kp(),
             best.ki(),
             best.kd(),
