@@ -62,7 +62,7 @@ fn run_ga(dir: &str, mut ga: GeneticAlgorithm, max_generations: usize) {
     println!("Generating initial population...");
 
     let mut best_individual = None;
-    let generations = Time::from((1.0, max_generations as f32));
+    let generations = Time::continuous(1.0, max_generations as f32);
 
     for _ in generations {
         println!("Evolving generation {}", ga.generation());

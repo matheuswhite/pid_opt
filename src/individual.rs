@@ -1,6 +1,6 @@
 use aule::prelude::*;
 use rand::{Rng, rngs::StdRng};
-use std::{f32::consts::PI, time::Duration};
+use std::f32::consts::PI;
 
 use crate::input;
 
@@ -126,9 +126,9 @@ impl Individual {
         dir: &str,
         seed: u64,
     ) -> f32 {
-        let time = Time::from((1e-2, 8.0 * PI));
+        let time = Time::continuous(1e-2, 8.0 * PI);
 
-        let inputs: [(&'static str, Box<dyn Input>); _] = [
+        let inputs: [(&str, Box<InputBlock>); _] = [
             ("step", Box::new(input::Step::new(1.0))),
             (
                 "sinusoidal",
@@ -156,10 +156,10 @@ impl Individual {
         for dt in time {
             if plotter_en {
                 for sim in sims.iter_mut() {
-                    let _ = dt >> sim.as_input();
+                    let _ = dt * sim.as_block();
                 }
             } else {
-                let _ = dt >> sims[2].as_input();
+                let _ = dt * sims[2].as_block();
             }
         }
 
@@ -199,12 +199,14 @@ impl PartialOrd for Individual {
     }
 }
 
+type InputBlock = dyn Block<Input = (), Output = f32, TimeType = Continuous>;
+
 struct Simulation {
-    input: Box<dyn Input>,
-    error_metric: IAE,
-    pid: PID,
+    input: Box<InputBlock>,
+    error_metric: IAE<Continuous>,
+    pid: PID<Continuous>,
     plant: SS<Euler>,
-    writter: Option<Writter>,
+    writter: Option<Writter<2, Continuous>>,
 }
 
 impl Simulation {
@@ -212,7 +214,7 @@ impl Simulation {
         kp: f32,
         ki: f32,
         kd: f32,
-        input: Box<dyn Input>,
+        input: Box<InputBlock>,
         name: Option<String>,
         model: Model,
         dir: &str,
@@ -224,7 +226,7 @@ impl Simulation {
 
         Self {
             input,
-            error_metric: IAE::new(),
+            error_metric: IAE::default(),
             pid: PID::new(kp, ki, kd),
             plant: match model {
                 Model::DCMotor => tf_motor,
@@ -241,21 +243,26 @@ impl Simulation {
     }
 }
 
-impl Input for Simulation {
-    fn output(&mut self, dt: Duration) -> Signal {
-        let signal = dt >> &mut *self.input;
-        let error = signal - self.plant.last_output();
-        let control_signal = self.pid.as_siso() * error;
-        let output = control_signal * self.plant.as_siso();
+impl Block for Simulation {
+    type Input = ();
+    type Output = f32;
+    type TimeType = Continuous;
 
-        let _ = error >> self.error_metric.as_metric();
+    fn output(
+        &mut self,
+        input: Signal<Self::Input, Self::TimeType>,
+    ) -> Signal<Self::Output, Self::TimeType> {
+        let signal = self.input.output(input);
+        let error = signal - self.plant.last_output();
+        let control_signal = error * self.pid.as_block();
+        let output = control_signal * self.plant.as_block();
+
+        let _ = error * self.error_metric.as_block();
 
         if let Some(writter) = &mut self.writter {
-            let _ = (signal, output) >> writter.as_output();
+            let _ = signal.map(|s| [s, output.value]) * writter.as_block();
         }
 
         output
     }
 }
-
-impl AsInput for Simulation {}

@@ -1,4 +1,4 @@
-use aule::prelude::{Input, Signal};
+use aule::prelude::{Block, Continuous, Signal};
 use rand::{Rng, SeedableRng, rngs::StdRng};
 use std::{f32::consts::PI, time::Duration};
 
@@ -12,12 +12,16 @@ impl Step {
     }
 }
 
-impl Input for Step {
-    fn output(&mut self, dt: Duration) -> Signal {
-        Signal {
-            value: self.amplitude,
-            dt,
-        }
+impl Block for Step {
+    type Input = ();
+    type Output = f32;
+    type TimeType = Continuous;
+
+    fn output(
+        &mut self,
+        input: Signal<Self::Input, Self::TimeType>,
+    ) -> Signal<Self::Output, Self::TimeType> {
+        input.map(|_| self.amplitude)
     }
 }
 
@@ -25,7 +29,6 @@ pub struct Sinusoidal {
     period: f32,
     amplitude: f32,
     offset: f32,
-    time: Duration,
 }
 
 impl Sinusoidal {
@@ -34,20 +37,22 @@ impl Sinusoidal {
             amplitude,
             period,
             offset,
-            time: Duration::ZERO,
         }
     }
 }
 
-impl Input for Sinusoidal {
-    fn output(&mut self, dt: Duration) -> Signal {
-        self.time += dt;
-        let t = self.time.as_secs_f32();
+impl Block for Sinusoidal {
+    type Input = ();
+    type Output = f32;
+    type TimeType = Continuous;
 
-        Signal {
-            value: self.offset + self.amplitude * (2.0 * PI * t / self.period).sin(),
-            dt,
-        }
+    fn output(
+        &mut self,
+        input: Signal<Self::Input, Self::TimeType>,
+    ) -> Signal<Self::Output, Self::TimeType> {
+        let t = input.delta.sim_time().as_secs_f32();
+
+        input.map(|_| self.offset + self.amplitude * (2.0 * PI * t / self.period).sin())
     }
 }
 
@@ -55,7 +60,6 @@ pub struct Square {
     period: f32,
     amplitude: f32,
     offset: f32,
-    time: Duration,
 }
 
 impl Square {
@@ -64,15 +68,20 @@ impl Square {
             amplitude,
             period,
             offset,
-            time: Duration::ZERO,
         }
     }
 }
 
-impl Input for Square {
-    fn output(&mut self, dt: Duration) -> Signal {
-        self.time += dt;
-        let t = self.time.as_secs_f32();
+impl Block for Square {
+    type Input = ();
+    type Output = f32;
+    type TimeType = Continuous;
+
+    fn output(
+        &mut self,
+        input: Signal<Self::Input, Self::TimeType>,
+    ) -> Signal<Self::Output, Self::TimeType> {
+        let t = input.delta.sim_time().as_secs_f32();
 
         let phase = (t % self.period) / self.period;
         let value = if phase < 0.5 {
@@ -81,7 +90,7 @@ impl Input for Square {
             self.offset
         };
 
-        Signal { value, dt }
+        input.map(|_| value)
     }
 }
 
@@ -89,7 +98,6 @@ pub struct Sawtooth {
     period: f32,
     amplitude: f32,
     offset: f32,
-    time: Duration,
 }
 
 impl Sawtooth {
@@ -98,20 +106,25 @@ impl Sawtooth {
             amplitude,
             period,
             offset,
-            time: Duration::ZERO,
         }
     }
 }
 
-impl Input for Sawtooth {
-    fn output(&mut self, dt: Duration) -> Signal {
-        self.time += dt;
-        let t = self.time.as_secs_f32();
+impl Block for Sawtooth {
+    type Input = ();
+    type Output = f32;
+    type TimeType = Continuous;
+
+    fn output(
+        &mut self,
+        input: Signal<Self::Input, Self::TimeType>,
+    ) -> Signal<Self::Output, Self::TimeType> {
+        let t = input.delta.sim_time().as_secs_f32();
 
         let phase = (t % self.period) / self.period;
         let value = self.offset + self.amplitude * phase;
 
-        Signal { value, dt }
+        input.map(|_| value)
     }
 }
 
@@ -155,9 +168,16 @@ impl Random {
     }
 }
 
-impl Input for Random {
-    fn output(&mut self, dt: Duration) -> Signal {
-        self.time += dt;
+impl Block for Random {
+    type Input = ();
+    type Output = f32;
+    type TimeType = Continuous;
+
+    fn output(
+        &mut self,
+        input: Signal<Self::Input, Self::TimeType>,
+    ) -> Signal<Self::Output, Self::TimeType> {
+        self.time += input.delta.dt();
         let t = self.time.as_secs_f32();
 
         let amplitude = self.new_amplitude();
@@ -174,9 +194,6 @@ impl Input for Random {
             self.time = Duration::ZERO;
         }
 
-        Signal {
-            value: amplitude,
-            dt,
-        }
+        input.map(|_| amplitude)
     }
 }
