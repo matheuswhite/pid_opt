@@ -1,7 +1,11 @@
-use std::process::Command;
+use std::{fs::File, process::Command};
 
-use crate::{genetic_algorithm::GeneticAlgorithmBuilder, individual::Model};
+use crate::{
+    genetic_algorithm::{GeneticAlgorithm, GeneticAlgorithmBuilder},
+    individual::Model,
+};
 use aule::prelude::*;
+use gag::Redirect;
 
 mod genetic_algorithm;
 mod individual;
@@ -10,20 +14,55 @@ mod population;
 mod work;
 
 fn main() {
-    println!("Removing last outputs...");
-    let _ = std::fs::remove_dir_all("output");
-    std::fs::create_dir_all("output").unwrap();
+    run_ga(
+        "dc_motor",
+        GeneticAlgorithmBuilder::default()
+            .with_population_size(1_000)
+            .with_parallel_works(4)
+            .with_model(Model::DCMotor)
+            .with_mutation_step(1.0)
+            .with_digit_range((-1, 3))
+            .with_output_dir("dc_motor")
+            .with_max_kp(100.0)
+            .with_max_ki(100.0)
+            .with_seed(0x2268a378740265f9)
+            .build(),
+        100,
+    );
+    run_ga(
+        "complex_system",
+        GeneticAlgorithmBuilder::default()
+            .with_population_size(1_000)
+            .with_parallel_works(4)
+            .with_model(Model::Complex)
+            .with_mutation_step(0.1)
+            .with_digit_range((-10, -1))
+            .with_output_dir("complex_system")
+            .with_max_kp(0.9)
+            .with_max_kd(0.9)
+            .with_seed(0x2268a378740265f9)
+            .build(),
+        100,
+    );
+}
+
+fn run_ga(dir: &str, mut ga: GeneticAlgorithm, max_generations: usize) {
+    let dir = format!("output/{dir}");
+    println!("Removing {} dir...", dir);
+    let _ = std::fs::remove_dir_all(&dir);
+    std::fs::create_dir_all(&dir).unwrap();
+
+    let file = File::create(format!("{dir}/log.txt")).unwrap();
+    let file_err = File::create(format!("{dir}/err.txt")).unwrap();
+    let _print_gag = Redirect::stdout(file).unwrap();
+    let _print_err_gag = Redirect::stderr(file_err).unwrap();
+
+    println!("Seed: {:#x}", ga.seed());
 
     println!("Generating initial population...");
 
-    let mut ga = GeneticAlgorithmBuilder::default()
-        .with_population_size(1_000)
-        .with_parallel_works(4)
-        .with_model(Model::Complex)
-        .build();
-
     let mut best_individual = None;
-    let generations = Time::from((1.0, 100.0));
+    let generations = Time::from((1.0, max_generations as f32));
 
     for _ in generations {
         println!("Evolving generation {}", ga.generation());
@@ -55,7 +94,11 @@ fn main() {
         );
         best.show();
 
-        let cmd = Command::new("python").arg("plot.py").output().unwrap();
+        let cmd = Command::new("python")
+            .arg("plot.py")
+            .arg(dir)
+            .output()
+            .unwrap();
         if cmd.status.success() {
             println!("Plot generated successfully.");
         } else {

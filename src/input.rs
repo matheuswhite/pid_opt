@@ -1,4 +1,5 @@
 use aule::prelude::{Input, Signal};
+use rand::{Rng, SeedableRng, rngs::StdRng};
 use std::{f32::consts::PI, time::Duration};
 
 pub struct Step {
@@ -122,10 +123,17 @@ pub struct Random {
     min_period: f32,
     current_period: Option<f32>,
     time: Duration,
+    rng: StdRng,
 }
 
 impl Random {
-    pub fn new(min_amplitude: f32, max_amplitude: f32, min_period: f32, max_period: f32) -> Self {
+    pub fn new(
+        min_amplitude: f32,
+        max_amplitude: f32,
+        min_period: f32,
+        max_period: f32,
+        seed: u64,
+    ) -> Self {
         Random {
             max_amplitude,
             min_amplitude,
@@ -134,15 +142,16 @@ impl Random {
             min_period,
             current_period: None,
             time: Duration::ZERO,
+            rng: StdRng::seed_from_u64(seed),
         }
     }
 
-    fn new_amplitude(&self) -> f32 {
-        rand::random::<f32>() * (self.max_amplitude - self.min_amplitude) + self.min_amplitude
+    fn new_amplitude(&mut self) -> f32 {
+        self.rng.random::<f32>() * (self.max_amplitude - self.min_amplitude) + self.min_amplitude
     }
 
-    fn new_period(&self) -> f32 {
-        rand::random::<f32>() * (self.max_period - self.min_period) + self.min_period
+    fn new_period(&mut self) -> f32 {
+        self.rng.random::<f32>() * (self.max_period - self.min_period) + self.min_period
     }
 }
 
@@ -151,12 +160,16 @@ impl Input for Random {
         self.time += dt;
         let t = self.time.as_secs_f32();
 
-        let mut amplitude = *self.current_amplitude.get_or_insert(self.new_amplitude());
-        let period = *self.current_period.get_or_insert(self.new_period());
+        let amplitude = self.new_amplitude();
+        let mut amplitude = *self.current_amplitude.get_or_insert(amplitude);
+
+        let period = self.new_period();
+        let period = *self.current_period.get_or_insert(period);
 
         let phase = t / period;
         if phase >= 1.0 {
-            amplitude = *self.current_amplitude.insert(self.new_amplitude());
+            amplitude = self.new_amplitude();
+            amplitude = *self.current_amplitude.insert(amplitude);
             self.current_period = Some(self.new_period());
             self.time = Duration::ZERO;
         }

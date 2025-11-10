@@ -1,3 +1,5 @@
+use rand::{Rng, SeedableRng, rngs::StdRng};
+
 use crate::{
     individual::{Individual, Model},
     work::{Work, work_pool},
@@ -6,23 +8,44 @@ use crate::{
 #[derive(Clone)]
 pub struct Population {
     individuals: Vec<Individual>,
+    rng: StdRng,
 }
-
+//0.0031834461
 impl Population {
-    pub fn new(size: usize, model: Model) -> Self {
-        let individuals = NewRandomPopulation::new(model).work((0..size).map(|_| ()).collect());
+    pub fn new(
+        size: usize,
+        model: Model,
+        dir: &'static str,
+        max_kp: f32,
+        max_ki: f32,
+        max_kd: f32,
+        seed: u64,
+    ) -> Self {
+        let individuals = NewRandomPopulation::new(model, dir, max_kp, max_ki, max_kd, seed)
+            .work((0..size).map(|_| ()).collect());
+        let rng = StdRng::seed_from_u64(seed);
 
-        Self { individuals }.sorted()
+        Self { individuals, rng }.sorted()
     }
 
-    pub fn new_parallel(size: usize, works: usize, model: Model) -> Self {
+    pub fn new_parallel(
+        size: usize,
+        works: usize,
+        model: Model,
+        dir: &'static str,
+        max_kp: f32,
+        max_ki: f32,
+        max_kd: f32,
+        seed: u64,
+    ) -> Self {
         let individuals = work_pool(
             works,
             (0..size).map(|_| ()).collect(),
-            NewRandomPopulation::new(model),
+            NewRandomPopulation::new(model, dir, max_kp, max_ki, max_kd, seed),
         );
+        let rng = StdRng::seed_from_u64(seed);
 
-        Self { individuals }.sorted()
+        Self { individuals, rng }.sorted()
     }
 
     pub fn len(&self) -> usize {
@@ -52,16 +75,26 @@ impl Population {
         let mut individuals = self.individuals;
         individuals.extend(other.individuals);
 
-        Population { individuals }.sorted()
+        Population {
+            individuals,
+            rng: self.rng,
+        }
+        .sorted()
     }
 
     pub fn get_nth_bests(&self, n: usize) -> Population {
-        self.individuals
+        let individuals = self
+            .individuals
             .iter()
             .take(n)
             .cloned()
             .collect::<Vec<_>>()
-            .into()
+            .into();
+
+        Population {
+            individuals,
+            rng: self.rng.clone(),
+        }
     }
 
     pub fn get_best(&self) -> Option<&Individual> {
@@ -80,19 +113,19 @@ impl Population {
     }
 
     pub fn pop_random_individual(&mut self) -> Individual {
-        let index = rand::random::<u32>() as usize % self.individuals.len();
+        let index = self.rng.random::<u32>() as usize % self.individuals.len();
         self.individuals.remove(index)
     }
 
-    pub fn get_random_individual(&self) -> &Individual {
-        let index = rand::random::<u32>() as usize % self.individuals.len();
-        &self.individuals[index]
+    pub fn get_random_individual(&mut self) -> Individual {
+        let index = self.rng.random::<u32>() as usize % self.individuals.len();
+        self.individuals[index].clone()
     }
-}
 
-impl From<Vec<Individual>> for Population {
-    fn from(individuals: Vec<Individual>) -> Self {
-        Self { individuals }.sorted()
+    pub fn from_individuals(individuals: Vec<Individual>, seed: u64) -> Self {
+        let rng = StdRng::seed_from_u64(seed);
+
+        Self { individuals, rng }.sorted()
     }
 }
 
@@ -100,15 +133,35 @@ impl From<Vec<Individual>> for Population {
 struct NewRandomPopulation {
     id: usize,
     model: Model,
+    dir: &'static str,
+    max_kp: f32,
+    max_ki: f32,
+    max_kd: f32,
+    rng: StdRng,
+    seed: u64,
 }
 
 impl NewRandomPopulation {
-    const MAX_KP: f32 = 0.9;
-    const MAX_KI: f32 = 0.0;
-    const MAX_KD: f32 = 0.9;
+    pub fn new(
+        model: Model,
+        dir: &'static str,
+        max_kp: f32,
+        max_ki: f32,
+        max_kd: f32,
+        seed: u64,
+    ) -> Self {
+        let rng = StdRng::seed_from_u64(seed);
 
-    pub fn new(model: Model) -> Self {
-        Self { id: 0, model }
+        Self {
+            id: 0,
+            model,
+            dir,
+            max_kp,
+            max_ki,
+            max_kd,
+            rng,
+            seed,
+        }
     }
 }
 
@@ -116,14 +169,14 @@ impl Work for NewRandomPopulation {
     type Input = ();
     type Output = Individual;
 
-    fn work(&self, input: Vec<Self::Input>) -> Vec<Self::Output> {
+    fn work(&mut self, input: Vec<Self::Input>) -> Vec<Self::Output> {
         let size = input.len();
         let mut individuals = Vec::with_capacity(size);
         for _ in 0..size {
-            let kp = rand::random::<f32>() * Self::MAX_KP;
-            let ki = rand::random::<f32>() * Self::MAX_KI;
-            let kd = rand::random::<f32>() * Self::MAX_KD;
-            individuals.push(Individual::new(kp, ki, kd, self.model));
+            let kp = self.rng.random::<f32>() * self.max_kp;
+            let ki = self.rng.random::<f32>() * self.max_ki;
+            let kd = self.rng.random::<f32>() * self.max_kd;
+            individuals.push(Individual::new(kp, ki, kd, self.model, self.dir, self.seed));
         }
 
         individuals

@@ -4,7 +4,7 @@ pub trait Work {
     type Input;
     type Output;
 
-    fn work(&self, input: Vec<Self::Input>) -> Vec<Self::Output>;
+    fn work(&mut self, input: Vec<Self::Input>) -> Vec<Self::Output>;
     fn set_id(&mut self, id: usize);
 }
 

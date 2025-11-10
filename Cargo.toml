@@ -5,4 +5,5 @@ edition = "2024"
 
 [dependencies]
 aule = { git = "https://github.com/matheuswhite/aule-rs.git" }
+gag = "1.0.0"
 rand = "0.9.2"

@@ -1,10 +1,12 @@
 import os
-
+import sys
 import matplotlib.pyplot as plt
 import pandas as pd
 
+directory = sys.argv[1]
+
 # Process and plot all CSV files
-for root, dirs, files in os.walk("output/"):
+for root, dirs, files in os.walk(f"{directory}"):
     for file in files:
         if not file.endswith(".csv"):
             continue
@@ -24,7 +26,7 @@ for root, dirs, files in os.walk("output/"):
         plt.grid(True, alpha=0.3)
 
         # Save with better filename
-        output_filename = f"output/plot_{file.replace('.csv', '')}.png"
+        output_filename = f"{directory}/plot_{file.replace('.csv', '')}.png"
         plt.savefig(output_filename, dpi=300, bbox_inches="tight")
         plt.close()
 

@@ -1,4 +1,5 @@
 use aule::prelude::*;
+use rand::{Rng, rngs::StdRng};
 use std::{f32::consts::PI, time::Duration};
 
 use crate::input;
@@ -17,15 +18,17 @@ pub struct Individual {
     kd: f32,
     fitness: f32,
     model: Model,
+    dir: &'static str,
+    seed: u64,
 }
 
 // father: 0.123124  mother: 0.567890 digit: 2 and random = father -> (0.003000, 0.007000)
-fn crossover_digit(father: f32, mother: f32, digit: u32) -> (f32, f32) {
-    let factor = 10f32.powi(-(digit as i32 + 1));
+fn crossover_digit(father: f32, mother: f32, digit: i32, rng: &mut StdRng) -> (f32, f32) {
+    let factor = 10f32.powi(digit);
     let father_digit = ((father / factor) as u32 % 10) as f32;
     let mother_digit = ((mother / factor) as u32 % 10) as f32;
 
-    let (d1, d2) = if rand::random::<f32>() <= 0.5 {
+    let (d1, d2) = if rng.random::<f32>() <= 0.5 {
         (father_digit, mother_digit)
     } else {
         (mother_digit, father_digit)
@@ -34,12 +37,12 @@ fn crossover_digit(father: f32, mother: f32, digit: u32) -> (f32, f32) {
     (d1 * factor, d2 * factor)
 }
 
-fn crossover_float(father: f32, mother: f32) -> (f32, f32) {
+fn crossover_float(father: f32, mother: f32, range: (i32, i32), rng: &mut StdRng) -> (f32, f32) {
     let mut child1 = 0.0;
     let mut child2 = 0.0;
 
-    for digit in 0..10 {
-        let (result1, result2) = crossover_digit(father, mother, digit);
+    for digit in range.0..=range.1 {
+        let (result1, result2) = crossover_digit(father, mother, digit, rng);
         child1 += result1;
         child2 += result2;
     }
@@ -48,57 +51,81 @@ fn crossover_float(father: f32, mother: f32) -> (f32, f32) {
 }
 
 impl Individual {
-    pub fn new(kp: f32, ki: f32, kd: f32, model: Model) -> Self {
+    pub fn new(kp: f32, ki: f32, kd: f32, model: Model, dir: &'static str, seed: u64) -> Self {
         Self {
             kp,
             ki,
             kd,
-            fitness: Self::eval_fitness(kp, ki, kd, false, model),
+            fitness: Self::eval_fitness(kp, ki, kd, false, model, dir, seed),
             model,
+            dir,
+            seed,
         }
     }
 
-    pub fn crossover(&self, other: &Individual) -> Vec<Individual> {
-        let (kp1, kp2) = crossover_float(self.kp, other.kp);
-        let (ki1, ki2) = crossover_float(self.ki, other.ki);
-        let (kd1, kd2) = crossover_float(self.kd, other.kd);
+    pub fn crossover(
+        &self,
+        other: &Individual,
+        digit_range: (i32, i32),
+        rng: &mut StdRng,
+    ) -> Vec<Individual> {
+        let (kp1, kp2) = crossover_float(self.kp, other.kp, digit_range, rng);
+        let (ki1, ki2) = crossover_float(self.ki, other.ki, digit_range, rng);
+        let (kd1, kd2) = crossover_float(self.kd, other.kd, digit_range, rng);
 
         vec![
-            Individual::new(kp1, ki1, kd1, self.model),
-            Individual::new(kp2, ki2, kd2, self.model),
+            Individual::new(kp1, ki1, kd1, self.model, self.dir, self.seed),
+            Individual::new(kp2, ki2, kd2, self.model, self.dir, self.seed),
         ]
     }
 
-    pub fn mutate(self, mutation_rate: f32, mutation_step: f32) -> Individual {
+    pub fn mutate(self, mutation_rate: f32, mutation_step: f32, rng: &mut StdRng) -> Individual {
         let kp = self.kp
-            + if rand::random::<f32>() < mutation_rate {
-                lerp(rand::random::<f32>(), -mutation_step, mutation_step)
+            + if rng.random::<f32>() < mutation_rate {
+                lerp(rng.random::<f32>(), -mutation_step, mutation_step)
             } else {
                 0.0
             };
 
         let ki = self.ki
-            + if rand::random::<f32>() < mutation_rate {
-                lerp(rand::random::<f32>(), -mutation_step, mutation_step)
+            + if rng.random::<f32>() < mutation_rate {
+                lerp(rng.random::<f32>(), -mutation_step, mutation_step)
             } else {
                 0.0
             };
 
         let kd = self.kd
-            + if rand::random::<f32>() < mutation_rate {
-                lerp(rand::random::<f32>(), -mutation_step, mutation_step)
+            + if rng.random::<f32>() < mutation_rate {
+                lerp(rng.random::<f32>(), -mutation_step, mutation_step)
             } else {
                 0.0
             };
 
-        Individual::new(kp.max(0.0), ki.max(0.0), kd.max(0.0), self.model)
+        Individual::new(
+            kp.max(0.0),
+            ki.max(0.0),
+            kd.max(0.0),
+            self.model,
+            self.dir,
+            self.seed,
+        )
     }
 
     pub fn show(&self) {
-        Self::eval_fitness(self.kp, self.ki, self.kd, true, self.model);
+        Self::eval_fitness(
+            self.kp, self.ki, self.kd, true, self.model, self.dir, self.seed,
+        );
     }
 
-    pub fn eval_fitness(kp: f32, ki: f32, kd: f32, plotter_en: bool, model: Model) -> f32 {
+    pub fn eval_fitness(
+        kp: f32,
+        ki: f32,
+        kd: f32,
+        plotter_en: bool,
+        model: Model,
+        dir: &str,
+        seed: u64,
+    ) -> f32 {
         let time = Time::from((1e-2, 8.0 * PI));
 
         let inputs: [(&'static str, Box<dyn Input>); _] = [
@@ -114,7 +141,7 @@ impl Individual {
             ),
             (
                 "random",
-                Box::new(input::Random::new(0.0, 1.0, 2.0 * PI, 2.5 * PI)),
+                Box::new(input::Random::new(0.0, 1.0, 2.0 * PI, 2.5 * PI, seed)),
             ),
         ];
         let mut sims = inputs.map(|(name, input)| {
@@ -123,7 +150,7 @@ impl Individual {
             } else {
                 None
             };
-            Simulation::new(kp, ki, kd, input, name, model)
+            Simulation::new(kp, ki, kd, input, name, model, dir)
         });
 
         for dt in time {
@@ -188,6 +215,7 @@ impl Simulation {
         input: Box<dyn Input>,
         name: Option<String>,
         model: Model,
+        dir: &str,
     ) -> Self {
         let k = 1.0;
         let a = 1.0;
@@ -202,8 +230,9 @@ impl Simulation {
                 Model::DCMotor => tf_motor,
                 Model::Complex => tf_complex,
             },
-            writter: name
-                .map(|name| Writter::new(&format!("output/{}.csv", name), ["input", "output"])),
+            writter: name.map(|name| {
+                Writter::new(&format!("output/{}/{}.csv", dir, name), ["input", "output"])
+            }),
         }
     }
 
